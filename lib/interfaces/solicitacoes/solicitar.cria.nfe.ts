@@ -1,8 +1,8 @@
-export class Rps {
-    tomadorCPF: string = "";
-    tomadorEmail: string = "";
-    tomadorRazaoSocial: string = "";
-    discriminacao: string = "";
+export interface SolicitarCriaNfe {
+    tomadorCPF: string;
+    tomadorEmail: string;
+    tomadorRazaoSocial: string;
+    discriminacao: string;
     serieRPS: string;
     aliquotaServicos: number;
     codServico: string;
