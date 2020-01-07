@@ -16,6 +16,7 @@ prefeitura.consultarNFe({
     inscricaoPrestador: "123123123123",
     numeroNFe : "122"
 }).then(nfe => {
-    console.log("consultarNFe",nfe)
+    console.log("NFe XML",nfe.xml())
+    console.log("NFe JSON",nfe.json())
 });
 ```
