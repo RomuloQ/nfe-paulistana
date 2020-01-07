@@ -58,7 +58,6 @@ class PaulistanaSOAP {
     }
 
     static sendXML(request, xml: string) {
-        console.log("11",xml);
-        return request({ VersaoSchema: '1', MensagemXML: xml });
+        return request({ VersaoSchema: '1', MensagemXML: xml }).then(res => res.RetornoXML);
     }
 }

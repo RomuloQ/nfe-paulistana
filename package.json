@@ -15,6 +15,7 @@
     "reflect-metadata": "^0.1.13",
     "soap": "^0.30.0",
     "xml-crypto": "^1.4.0",
+    "xml2json-light": "^1.0.6",
     "xmlbuilder": "^13.0.2"
   }
 }
