@@ -1,0 +1,45 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+
+defaults: &defaults
+  working_directory: ~/nfe-paulistana
+  docker:
+    - image: circleci/node:11
+jobs:
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/nfe-paulistana
+      - run:
+          name: build package files
+          command: npm run build
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/nfe-paulistana/.npmrc
+      - run:
+          name: Publish package
+          command: npm publish
+
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              only:
+                - master
+                - develop
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master

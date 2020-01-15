@@ -1,12 +1,12 @@
 import {Methods} from "../interfaces/methods";
-import {Config} from "../interfaces/config";
+import {Auth} from "../interfaces/auth";
 import {AssinarXml} from "../assinaturas/assinar.xml";
 
 export class XMLBuildStrategy {
 
     constructor(
         private readonly method: Methods,
-        private readonly config: Config)
+        private readonly config: Auth)
     {}
 
     public async build() {

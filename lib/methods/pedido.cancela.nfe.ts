@@ -1,6 +1,6 @@
 import {Methods} from "../interfaces/methods";
 import { create } from 'xmlbuilder';
-import {Config} from "../interfaces/config";
+import {Auth} from "../interfaces/auth";
 import {SocilitarCancelamentoNfe} from "../interfaces/solicitacoes/socilitar.cancelamento.nfe";
 import {AssinarCancelamento} from "../assinaturas/assinar.cancelamento";
 
@@ -8,7 +8,7 @@ export class PedidoCancelaNfe  implements Methods {
 
     HEAD = "PedidoCancelamentoNFe";
     Retorno;
-    constructor(private readonly data: SocilitarCancelamentoNfe, private readonly config: Config) {}
+    constructor(private readonly data: SocilitarCancelamentoNfe, private readonly config: Auth) {}
 
     async buildXML() {
         return create('PedidoCancelamentoNFe')

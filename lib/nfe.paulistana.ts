@@ -1,4 +1,4 @@
-import {Config} from "./interfaces/config";
+import {Auth} from "./interfaces/auth";
 import {PedidoConsulta} from "./methods/pedido.consulta";
 import {PedidoConsultaLote} from "./methods/pedido.consulta.lote";
 import {PaulistanaRepository} from "./paulistana.repository";
@@ -11,11 +11,10 @@ import * as parser from 'xml2json-light';
 
 export class NfePaulistana {
 
-    public config: Config;
+    public config: Auth;
     public repository: PaulistanaRepository;
-    private retorno_xml;
 
-    constructor(config : Config) {
+    constructor(config : Auth) {
         this.config = config;
         this.repository = new PaulistanaRepository(config)
     }
@@ -27,12 +26,14 @@ export class NfePaulistana {
 
     public async consultarLote(data: SolicitarConsultaLote) {
         const xml = await new XMLBuildStrategy(new PedidoConsultaLote(data), this.config).build();
-        return this.repository.consultarLote(xml)
+        return this.response(await this.repository.consultarLote(xml))
+
     }
 
     public async cancelarNFe(data: SocilitarCancelamentoNfe) {
         const xml = await new XMLBuildStrategy(new PedidoCancelaNfe(data,this.config),this.config).build()
-        return this.repository.cancelarNfe(xml)
+        return this.response(await this.repository.cancelarNfe(xml))
+
     }
 
     private response(data) {

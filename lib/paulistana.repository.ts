@@ -1,11 +1,11 @@
 import * as fs from "fs";
 import * as soap from 'soap';
 import * as util from "util";
-import {Config} from "./interfaces/config";
+import {Auth} from "./interfaces/auth";
 
 export class PaulistanaRepository {
 
-    constructor(private  readonly config: Config) {}
+    constructor(private  readonly config: Auth) {}
 
     public async consultaNFe(xml: string) {
         const client = await PaulistanaSOAP.client(this.config);
@@ -42,7 +42,7 @@ export class PaulistanaRepository {
 
 
 class PaulistanaSOAP {
-    static async client(config: Config) {
+    static async client(config: Auth) {
         const request = await soap.createClientAsync('https://nfe.prefeitura.sp.gov.br/ws/lotenfe.asmx?WSDL', {
             wsdl_options: {
                 pfx :  fs.readFileSync(config.certificado.path),
