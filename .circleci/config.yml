@@ -15,6 +15,8 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/nfe-paulistana
+      - run: npm install
+      - run: sleep 10
       - run:
           name: build package files
           command: npm run build
